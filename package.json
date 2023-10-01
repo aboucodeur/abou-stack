@@ -1,0 +1,19 @@
+{
+  "name": "my-stack",
+  "version": "1.0.0",
+  "description": "Scafold new startup app based in pern stack",
+  "main": "index.js",
+  "bin": {
+    "abou-stack": "./index.js"
+  },
+  "scripts": {
+    "client:start": "pnpm --filter frontend dev",
+    "server:start": "pnpm --filter backend dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prompts": "^2.4.2"
+  }
+}
