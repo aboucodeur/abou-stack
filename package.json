@@ -4,11 +4,12 @@
   "description": "Scafold new startup app based in pern stack",
   "main": "index.js",
   "bin": {
-    "abou-stack": "./index.js"
+    "astack": "./index.js"
   },
   "scripts": {
     "client:start": "pnpm --filter frontend dev",
-    "server:start": "pnpm --filter backend dev"
+    "server:start": "pnpm --filter backend dev",
+    "static:start": "pnpm --filter static dev"
   },
   "keywords": [],
   "author": "",

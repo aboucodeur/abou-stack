@@ -1,8 +1,8 @@
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 dotenv.config()
 
-import http from "http"
-import app from "./src/app.mjs"
+import http from 'http'
+import app from './src/app.mjs'
 // const fs = require("fs")
 
 function normalizePort(val) {
@@ -13,15 +13,15 @@ function normalizePort(val) {
 }
 
 function onError(error) {
-  if (error.syscall !== "listen") throw error
-  const bind = typeof port === "string" ? "Pipe " + port : "Port " + port
+  if (error.syscall !== 'listen') throw error
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
   switch (error.code) {
-    case "EACCES":
-      console.error(bind + " requires elevated privileges")
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges')
       process.exit(1)
       break
-    case "EADDRINUSE":
-      console.error(bind + " is already in use")
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use')
       process.exit(1)
       break
     default:
@@ -31,8 +31,9 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address()
-  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port
-  console.log(`Running at ${bind}`)
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
+  console.log(`URL : http://localhost:3001`)
+  console.log(`Running at port ${bind}`)
 }
 
 // ** SSL CERTIFICATE
@@ -48,5 +49,5 @@ const server = http.createServer(app)
 const PORT = process.env.PORT || 3001
 const port = normalizePort(PORT)
 
-app.set("port", port)
-server.listen(port).on("error", onError).on("listening", onListening)
+app.set('port', port)
+server.listen(port).on('error', onError).on('listening', onListening)

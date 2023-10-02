@@ -46,7 +46,7 @@ function applyConstraint() {
     .query(pgConstraint)
     .then((result) => console.log(result))
     .catch((err) => console.error(err))
-    .finally(() => console.log('DB : Contrainte appliquer avec succes'))
+    .finally(() => console.log('Constraint applied !'))
 }
 
 async function _isConnect() {
@@ -87,3 +87,6 @@ export function dbConnect(opt = null) {
       console.log('> database ~ auth failed')
     })
 }
+
+// function pour register les modeles rapidement 
+// sans perdres le typages

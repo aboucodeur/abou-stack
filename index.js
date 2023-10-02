@@ -1,4 +1,3 @@
-// index.js
 const fs = require("fs");
 const path = require("path");
 const prompts = require("prompts");
@@ -20,6 +19,14 @@ function copyRecursive(source, destination) {
   });
 }
 
+function sourceDestination(name = "", conf = { package: null, out: null }) {
+  if (name && conf.package && conf.out) {
+    const sourcePath = path.join(conf.package, name);
+    const destinationPath = path.join(conf.out);
+    copyRecursive(sourcePath, destinationPath);
+  }
+}
+
 async function generateProject() {
   const response = await prompts([
     {
@@ -27,22 +34,44 @@ async function generateProject() {
       name: "projectName",
       message: "Enter the project name:",
     },
+    {
+      type: "select",
+      name: "projectType",
+      message: "Select type of projetc:",
+      choices: [
+        { title: "Fullstack SPA", value: "spa" },
+        { title: "Multi page application", value: "static" },
+        { title: "PHP App", value: "php" },
+      ],
+    },
   ]);
 
-  // PATH input or output
+  // source and output path
   const packagePath = path.join(__dirname, "packages");
   const outputPath = path.join(__dirname, response.projectName);
 
   fs.mkdirSync(outputPath);
-  fs.mkdirSync(path.join(outputPath, "frontend"));
-  fs.mkdirSync(path.join(outputPath, "backend"));
+  const { projectType } = response;
 
-  fs.readdirSync(packagePath).forEach((source) => {
-    copyRecursive(
-      path.join(packagePath, source),
-      path.join(outputPath, source)
-    );
-  });
+  if (projectType === "static" || projectType === "php") {
+    sourceDestination(projectType, {
+      package: packagePath,
+      out: outputPath,
+    });
+  } else if (response.projectType === "spa") {
+    fs.mkdirSync(path.join(outputPath, "frontend"));
+    fs.mkdirSync(path.join(outputPath, "backend"));
+
+    // recursive copy
+    fs.readdirSync(packagePath)
+      .filter((pack) => pack.includes[("backend", "frontend")])
+      .forEach((source) => {
+        copyRecursive(
+          path.join(packagePath, source),
+          path.join(outputPath, source)
+        );
+      });
+  }
 
   console.log(
     `Project ${response.projectName} created successfully at ${outputPath}`

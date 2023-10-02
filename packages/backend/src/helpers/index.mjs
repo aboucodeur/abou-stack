@@ -1,28 +1,28 @@
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 dotenv.config()
 
 // sender attach
 function responseSender(req, res, next) {
   // Attach a helper function to the response object
-  res.sendSuccess = (data, message = "Success", status = 200) => {
+  res.sendSuccess = (data, message = 'Success', status = 200) => {
     return res.status(status).json({ success: true, data, message })
   }
 
-  res.sendError = (error, status = 500) => {
+  res.sendError = (message = 'Error', status = 500) => {
     const err = new Error()
-    err.message = error
+    err.message = message
     err.status = status
     // error middleware capture handle the rest
     return err
   }
 
-  next()
+  return next()
 }
 
 // get client ip address like reverse proxy config
 function getIP(req) {
-  req.headers["x-real-ip"] ||
-    req.headers["x-forwarded-for"] ||
+  req.headers['x-real-ip'] ||
+    req.headers['x-forwarded-for'] ||
     req.connection.remoteAddress // proxy_set_header X-Real-IP $remote_addr;
 }
 
@@ -34,7 +34,7 @@ function createFileURL(req = null) {
   const filename = req.file.filename
   return isHost
     ? `${isHost}/file/${filename}`
-    : `${req.protocol}://${req.get("host")}/file/${req.file.filename}`
+    : `${req.protocol}://${req.get('host')}/file/${req.file.filename}`
 }
 
 export { responseSender, getIP, createFileURL }
