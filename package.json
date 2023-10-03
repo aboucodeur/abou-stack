@@ -9,12 +9,18 @@
   "scripts": {
     "client:start": "pnpm --filter frontend dev",
     "server:start": "pnpm --filter backend dev",
-    "static:start": "pnpm --filter static dev"
+    "static:start": "pnpm --filter static dev",
+    "run:ci:prod": "bash ./packages/ci/tohttps.sh && ./bash ./packages/ci/production.sh",
+    "run:ci:dev": "bash ./packages/ci/production.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "gulp-run-command": "^0.0.10",
     "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
   }
 }

@@ -1,81 +1,81 @@
-const fs = require("fs");
-const path = require("path");
-const prompts = require("prompts");
+const fs = require('fs')
+const path = require('path')
+const prompts = require('prompts')
 
 function copyRecursive(source, destination) {
-  const files = fs.readdirSync(source);
+  const files = fs.readdirSync(source)
 
   files.forEach((file) => {
-    const sourcePath = path.join(source, file);
-    const destinationPath = path.join(destination, file);
-    const stats = fs.statSync(sourcePath);
+    const sourcePath = path.join(source, file)
+    const destinationPath = path.join(destination, file)
+    const stats = fs.statSync(sourcePath)
 
     if (stats.isFile()) {
-      fs.copyFileSync(sourcePath, destinationPath);
-    } else if (stats.isDirectory() && file !== "node_modules") {
-      fs.mkdirSync(destinationPath);
-      copyRecursive(sourcePath, destinationPath);
+      fs.copyFileSync(sourcePath, destinationPath)
+    } else if (stats.isDirectory() && file !== 'node_modules') {
+      fs.mkdirSync(destinationPath)
+      copyRecursive(sourcePath, destinationPath)
     }
-  });
+  })
 }
 
-function sourceDestination(name = "", conf = { package: null, out: null }) {
+function sourceDestination(name = '', conf = { package: null, out: null }) {
   if (name && conf.package && conf.out) {
-    const sourcePath = path.join(conf.package, name);
-    const destinationPath = path.join(conf.out);
-    copyRecursive(sourcePath, destinationPath);
+    const sourcePath = path.join(conf.package, name)
+    const destinationPath = path.join(conf.out)
+    copyRecursive(sourcePath, destinationPath)
   }
 }
 
 async function generateProject() {
   const response = await prompts([
     {
-      type: "text",
-      name: "projectName",
-      message: "Enter the project name:",
+      type: 'text',
+      name: 'projectName',
+      message: 'Enter the project name:'
     },
     {
-      type: "select",
-      name: "projectType",
-      message: "Select type of projetc:",
+      type: 'select',
+      name: 'projectType',
+      message: 'Select type of projetc:',
       choices: [
-        { title: "Fullstack SPA", value: "spa" },
-        { title: "Multi page application", value: "static" },
-        { title: "PHP App", value: "php" },
-      ],
-    },
-  ]);
+        { title: 'Fullstack SPA', value: 'spa' },
+        { title: 'Multi page application', value: 'static' },
+        { title: 'PHP App', value: 'php' }
+      ]
+    }
+  ])
 
   // source and output path
-  const packagePath = path.join(__dirname, "packages");
-  const outputPath = path.join(__dirname, response.projectName);
+  const packagePath = path.join(__dirname, 'packages')
+  const outputPath = path.join(__dirname, response.projectName)
 
-  fs.mkdirSync(outputPath);
-  const { projectType } = response;
+  fs.mkdirSync(outputPath)
+  const { projectType } = response
 
-  if (projectType === "static" || projectType === "php") {
+  if (projectType === 'static' || projectType === 'php') {
     sourceDestination(projectType, {
       package: packagePath,
-      out: outputPath,
-    });
-  } else if (response.projectType === "spa") {
-    fs.mkdirSync(path.join(outputPath, "frontend"));
-    fs.mkdirSync(path.join(outputPath, "backend"));
+      out: outputPath
+    })
+  } else if (response.projectType === 'spa') {
+    fs.mkdirSync(path.join(outputPath, 'frontend'))
+    fs.mkdirSync(path.join(outputPath, 'backend'))
 
     // recursive copy
     fs.readdirSync(packagePath)
-      .filter((pack) => pack.includes[("backend", "frontend")])
+      .filter((pack) => pack.includes['backend', 'frontend'])
       .forEach((source) => {
         copyRecursive(
           path.join(packagePath, source),
           path.join(outputPath, source)
-        );
-      });
+        )
+      })
   }
 
   console.log(
     `Project ${response.projectName} created successfully at ${outputPath}`
-  );
+  )
 }
 
-generateProject();
+generateProject()

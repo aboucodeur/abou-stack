@@ -8,7 +8,8 @@
     "dev": "nodemon server.js",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix --write {app,__{tests,mocks}__}/**/*.js",
-    "format": "prettier --write --write {app,__{tests,mocks}__}/**/*.js"
+    "format": "prettier --write --write {app,__{tests,mocks}__}/**/*.js",
+    "run:ci": "gulp --series ui setup-env setup-url build-react build-prod"
   },
   "keywords": [],
   "author": "",
