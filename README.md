@@ -25,3 +25,9 @@ Covers most cases in the development of an application.
 - Git for versioning the code
 - Eslint and Prettier to improve development comfort
 - CI: NODE JS to quickly scaffold a derivative of the project
+
+## Installation
+
+Just scafold your next projet fast !
+
+`npm create abou-stack@latest`
