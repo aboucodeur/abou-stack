@@ -34,16 +34,29 @@ You can modify and adapt to your need !
 
 ## Used tools
 
-- rollup
-- gulp
-- vite (react) for SPA
-- astro for MPA
-- backend : based to express, node js
-- database : postgresql and sequelize ORM
-- eslint / prettier
+- Node js                         => Runtime
+- PNPM (workspaces setup)         => packages/*
+- Packages
+  - Frontend  : React and Vite SPA
+  - Backend   : Express js , Postgresql , sequelize ORM ,
+  - static    : Astro MPA
+- CLI
+  - prompts
+  - minimist
+  - fs / path
+  - package.json setup
+- BUILD
+  - Rollup
+  - gulp for task runner and prepare package
+  - gulp-shell run shell command
+  - some rollup plugin to bundle it
+- DX (Developper experience)
+  - eslint
+  - prettier
+  - vscode
 
-## Installation
+## INSTALLATION
 
-Just scafold your next projet fast !
+The installation is simple and fast just type and happy coding
 
 `npm create abou-stack@latest`

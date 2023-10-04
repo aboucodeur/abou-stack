@@ -23,7 +23,7 @@ function setupPackage() {
   delete customPackage.devDependencies
   delete customPackage.scripts
   let newPackage = customPackage
-  newPackage.version = process.env.VERSION || '1.0.0'
+  newPackage.version = process.env.VERSION || 'no-version'
   fs.writeFileSync('package_tmp.json', JSON.stringify(newPackage), 'utf8')
   return gulp
     .src('.')

@@ -6,10 +6,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint --fix --write {app,__{tests,mocks}__}/**/*.js",
-    "format": "prettier --write --write {app,__{tests,mocks}__}/**/*.js",
-    "run:ci": "gulp --series ui setup-env setup-url build-react build-prod"
+    "lint": "eslint --write {app,__{tests,mocks}__,src}/**/*.js",
+    "lint:fix": "eslint --fix --write {app,__{tests,mocks}__,src}/**/*.js",
+    "format": "prettier --write {app,__{tests,mocks}__,src}/**/*.js"
   },
   "keywords": [],
   "author": "",

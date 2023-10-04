@@ -1,11 +1,12 @@
-const fs = require('fs'),
- path = require('path'),
+const fs = require('node:fs'),
+ path = require('node:path'),
  prompts = require('prompts'),
  args = require('minimist')(process.argv.slice(2));
 
  const userAppName = args['_'][0]
 
 
+//  recursive copy ignore node_modules
 function copyRecursive(source, destination) {
   const files = fs.readdirSync(source)
 
@@ -23,6 +24,7 @@ function copyRecursive(source, destination) {
   })
 }
 
+// simple source and destination copy
 function sourceDestination(name = '', conf = { package: null, out: null }) {
   if (name && conf.package && conf.out) {
     const sourcePath = path.join(conf.package, name)
@@ -43,15 +45,15 @@ async function generateProject() {
       name: 'projectType',
       message: 'Select type of projetc:',
       choices: [
-        { title: 'Fullstack SPA', value: 'spa' },
+        { title: 'Fullstack PERN APP', value: 'pern' },
         { title: 'Multi page application', value: 'static' },
       ]
     }
   ])
 
-  // source and output path
+  // source and output PATH
   const getName = userAppName ? userAppName : response.projectName
-  const packagePath = path.join(__dirname, 'packages') // like my starter
+  const packagePath = path.join(__dirname, 'packages') // like starter
   const outputPath = path.join(process.cwd(), getName) // like your computer
 
   fs.mkdirSync(outputPath)
@@ -62,7 +64,7 @@ async function generateProject() {
       package: packagePath,
       out: outputPath
     })
-  } else if (response.projectType === 'spa') {
+  } else if (response.projectType === 'pern') {
     fs.mkdirSync(path.join(outputPath, 'frontend'))
     fs.mkdirSync(path.join(outputPath, 'backend'))
 
@@ -81,7 +83,7 @@ async function generateProject() {
   console.log(
     `Project ${getName} created successfully at ${outputPath}`
   )
-  console.log(`cd ${outputPath}`)
+  console.log(`cd ${getName}`)
   console.log(`Change world !`)
 }
 
