@@ -41,19 +41,18 @@ async function generateProject() {
       choices: [
         { title: 'Fullstack SPA', value: 'spa' },
         { title: 'Multi page application', value: 'static' },
-        { title: 'PHP App', value: 'php' }
       ]
     }
   ])
 
   // source and output path
-  const packagePath = path.join(__dirname, 'packages')
-  const outputPath = path.join(__dirname, response.projectName)
+  const packagePath = path.join(__dirname, 'packages') // like my starter
+  const outputPath = path.join(process.cwd(), response.projectName) // like your computer
 
   fs.mkdirSync(outputPath)
   const { projectType } = response
 
-  if (projectType === 'static' || projectType === 'php') {
+  if (projectType === 'static') {
     sourceDestination(projectType, {
       package: packagePath,
       out: outputPath

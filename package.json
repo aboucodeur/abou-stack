@@ -1,26 +1,44 @@
 {
-  "name": "my-stack",
+  "name": "create-abou-stack",
   "version": "1.0.0",
   "description": "Scafold new startup app based in pern stack",
   "main": "index.js",
   "bin": {
-    "astack": "./index.js"
+    "create-abou-stack": "index.js"
+  },
+  ".": {
+    "default": "index.js"
   },
   "scripts": {
+    "assets": "cp -r licence.md README.md dist/",
+    "postbuild": "cp package.json dist/ && cp -r packages dist && rm -rf dist/packages/**/node_modules",
+    "build": "rm -rf dist/* && rollup -c rollup.config.js && pnpm run postbuild && pnpm run assets",
     "client:start": "pnpm --filter frontend dev",
     "server:start": "pnpm --filter backend dev",
-    "static:start": "pnpm --filter static dev",
-    "run:ci:prod": "bash ./packages/ci/tohttps.sh && ./bash ./packages/ci/production.sh",
-    "run:ci:dev": "bash ./packages/ci/production.sh"
+    "static:start": "pnpm --filter static dev"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "aboustack",
+    "create-abou-stack",
+    "fullstack",
+    "react",
+    "express",
+    "node",
+    "postgres",
+    "vite",
+    "astro",
+    "stack"
+  ],
+  "author": "aboucodeur",
   "license": "ISC",
   "dependencies": {
-    "gulp-run-command": "^0.0.10",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-terser": "^0.4.3",
+    "gulp": "^4.0.2",
+    "rollup": "^3.29.4"
   }
 }
