@@ -1,7 +1,7 @@
 import gulp from 'gulp'
 import shell from 'gulp-shell'
 
-const PREFIX = '/home/abou/dev/projets/Yeye_lts'
+const PREFIX = 'YOUR_APP_PATH'
 const SERVER_PATH = `${PREFIX}/server`
 const CLIENT_PATH = `${PREFIX}/frontend`
 const SIP = '66.175.214.6'
