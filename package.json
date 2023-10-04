@@ -1,44 +1,53 @@
 {
-  "name": "create-abou-stack",
-  "version": "1.0.0",
-  "description": "Scafold new startup app based in pern stack",
-  "main": "index.js",
-  "bin": {
-    "create-abou-stack": "index.js"
-  },
-  ".": {
-    "default": "index.js"
-  },
-  "scripts": {
-    "assets": "cp -r licence.md README.md dist/",
-    "postbuild": "cp package.json dist/ && cp -r packages dist && rm -rf dist/packages/**/node_modules",
-    "build": "rm -rf dist/* && rollup -c rollup.config.js && pnpm run postbuild && pnpm run assets",
-    "client:start": "pnpm --filter frontend dev",
-    "server:start": "pnpm --filter backend dev",
-    "static:start": "pnpm --filter static dev"
-  },
-  "keywords": [
-    "aboustack",
-    "create-abou-stack",
-    "fullstack",
-    "react",
-    "express",
-    "node",
-    "postgres",
-    "vite",
-    "astro",
-    "stack"
-  ],
-  "author": "aboucodeur",
-  "license": "ISC",
-  "dependencies": {
-    "prompts": "^2.4.2"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.4",
-    "@rollup/plugin-node-resolve": "^15.2.1",
-    "@rollup/plugin-terser": "^0.4.3",
-    "gulp": "^4.0.2",
-    "rollup": "^3.29.4"
-  }
+    "name": "create-abou-stack",
+    "version": "1.0.0",
+    "description": "Scafold new startup app based in pern stack",
+    "main": "index.js",
+    "bin": {
+        "create-abou-stack": "./index.js"
+    },
+    ".": {
+        "default": "./index.js"
+    },
+    "files": [
+        "dist",
+        "packages",
+        "index.js",
+        "LICENCE",
+        "package.json",
+        "README.md"
+    ],
+    "scripts": {
+        "postbuild": "cd dist && npm publish --access public",
+        "build": "rm -rf dist && rollup -c rollup.config.js && VERSION=0.0.26 gulp && pnpm postbuild",
+        "client:start": "pnpm --filter frontend dev",
+        "server:start": "pnpm --filter backend dev",
+        "static:start": "pnpm --filter static dev"
+    },
+    "keywords": [
+        "aboustack",
+        "create-abou-stack",
+        "fullstack",
+        "react",
+        "express",
+        "node",
+        "postgres",
+        "vite",
+        "astro",
+        "stack"
+    ],
+    "author": "aboucodeur",
+    "license": "ISC",
+    "dependencies": {
+        "prompts": "^2.4.2"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.4",
+        "@rollup/plugin-node-resolve": "^15.2.1",
+        "@rollup/plugin-terser": "^0.4.3",
+        "gulp": "^4.0.2",
+        "gulp-shell": "^0.8.0",
+        "minimist": "^1.2.8",
+        "rollup": "^3.29.4"
+    }
 }

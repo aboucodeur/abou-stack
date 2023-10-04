@@ -1,6 +1,10 @@
-const fs = require('fs')
-const path = require('path')
-const prompts = require('prompts')
+const fs = require('fs'),
+ path = require('path'),
+ prompts = require('prompts'),
+ args = require('minimist')(process.argv.slice(2));
+
+ const userAppName = args['_'][0]
+
 
 function copyRecursive(source, destination) {
   const files = fs.readdirSync(source)
@@ -29,7 +33,7 @@ function sourceDestination(name = '', conf = { package: null, out: null }) {
 
 async function generateProject() {
   const response = await prompts([
-    {
+    userAppName ? {} : {
       type: 'text',
       name: 'projectName',
       message: 'Enter the project name:'
@@ -46,8 +50,9 @@ async function generateProject() {
   ])
 
   // source and output path
+  const getName = userAppName ? userAppName : response.projectName
   const packagePath = path.join(__dirname, 'packages') // like my starter
-  const outputPath = path.join(process.cwd(), response.projectName) // like your computer
+  const outputPath = path.join(process.cwd(), getName) // like your computer
 
   fs.mkdirSync(outputPath)
   const { projectType } = response
@@ -74,7 +79,7 @@ async function generateProject() {
   }
 
   console.log(
-    `Project ${response.projectName} created successfully at ${outputPath}`
+    `Project ${getName} created successfully at ${outputPath}`
   )
   console.log(`cd ${outputPath}`)
   console.log(`Change world !`)
