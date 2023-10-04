@@ -5,6 +5,11 @@ without spending time reconfiguring everything or figuring out where to start.
 
 Covers most cases in the development of an application.
 
+## Motivation
+
+I build this tech stack, to create my application fast and focus in code.
+Javascript is fast and all days your are some framework !
+
 - **Frontend**
   - HTML / CSS                  => Classic
   - Framework                   => For modern applications

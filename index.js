@@ -63,8 +63,9 @@ async function generateProject() {
 
     // recursive copy
     fs.readdirSync(packagePath)
-      .filter((pack) => pack.includes['backend', 'frontend'])
+      .filter((pack) => pack === 'backend' || pack === 'frontend')
       .forEach((source) => {
+        console.log(source)
         copyRecursive(
           path.join(packagePath, source),
           path.join(outputPath, source)
