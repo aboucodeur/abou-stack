@@ -76,6 +76,8 @@ async function generateProject() {
   console.log(
     `Project ${response.projectName} created successfully at ${outputPath}`
   )
+  console.log(`cd ${outputPath}`)
+  console.log(`Change world !`)
 }
 
 generateProject()
