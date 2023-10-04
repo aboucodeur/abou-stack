@@ -5,8 +5,7 @@ const fs = require('node:fs'),
 
  const userAppName = args['_'][0]
 
-
-//  recursive copy ignore node_modules
+//  recursive
 function copyRecursive(source, destination) {
   const files = fs.readdirSync(source)
 
