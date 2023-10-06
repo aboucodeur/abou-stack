@@ -9,7 +9,6 @@ const SSH_PARAMS = `abou@${SIP}`
 
 // HAPPY CODING !
 const mode = process.env.MODE || 'prod'
-console.log(mode)
 
 function UI() {
   console.log('-----------------------------------')

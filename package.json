@@ -3,6 +3,10 @@
     "version": "1.0.0",
     "description": "Scafold new startup app based in pern stack",
     "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/aboucodeur/abou-stack.git"
+    },
     "bin": {
         "create-abou-stack": "./index.js"
     },
@@ -13,7 +17,7 @@
         "dist",
         "packages",
         "index.js",
-        "LICENCE",
+        "LICENSE.md",
         "package.json",
         "README.md"
     ],
@@ -37,7 +41,7 @@
         "stack"
     ],
     "author": "aboucodeur",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "prompts": "^2.4.2"
     },
