@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Home() {
-  return <div>Change Africa !</div>
+  return <div>Abou stack !</div>
 }
 
 export default Home

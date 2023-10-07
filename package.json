@@ -1,8 +1,11 @@
 {
     "name": "create-abou-stack",
     "version": "1.0.0",
-    "description": "Scafold new startup app based in pern stack",
+    "description": "Scafold new aboustack app based in pern stack",
     "main": "index.js",
+    "publishConfig": {
+        "access": "public"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/aboucodeur/abou-stack.git"
@@ -22,7 +25,7 @@
         "README.md"
     ],
     "scripts": {
-        "postbuild": "VERSION=0.0.27 npx gulp && cd dist && npm publish --access public",
+        "postbuild": "VERSION=0.0.29 npx gulp && cd dist && npm publish",
         "build": "rm -rf dist && rollup -c rollup.config.js && pnpm postbuild",
         "client:start": "pnpm --filter frontend dev",
         "server:start": "pnpm --filter backend dev",

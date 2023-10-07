@@ -9,7 +9,7 @@ function copyFile() {
 }
 
 // setup packages
-function postBuild() {
+function preBuild() {
   return gulp
     .src('.')
     .pipe(
@@ -19,11 +19,11 @@ function postBuild() {
 
 // steup package.json
 function setupPackage() {
-  const customPackage = JSON.parse(package)
-  delete customPackage.devDependencies
-  delete customPackage.scripts
-  let newPackage = customPackage
-  newPackage.version = process.env.VERSION || 'no-version'
+  const currentPackage = JSON.parse(package)
+  delete currentPackage.devDependencies
+  delete currentPackage.scripts
+  let newPackage = currentPackage
+  newPackage.version = process.env.VERSION || '0.0.0'
   fs.writeFileSync('package_tmp.json', JSON.stringify(newPackage), 'utf8')
   return gulp
     .src('.')
@@ -37,4 +37,4 @@ function setupPackage() {
 }
 
 // run
-gulp.task('default', gulp.series(copyFile, setupPackage, postBuild))
+gulp.task('default', gulp.series(copyFile, setupPackage, preBuild))
