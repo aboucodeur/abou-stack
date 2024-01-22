@@ -5,7 +5,9 @@ const package = fs.readFileSync('./package.json', 'utf8')
 
 // copy recommended files
 function copyFile() {
-  return gulp.src(['LICENSE.md', 'README.md']).pipe(gulp.dest('dist/'))
+  return gulp
+    .src(['LICENSE.md', 'README.md', 'composer.phar'])
+    .pipe(gulp.dest('dist/'))
 }
 
 // setup packages dir and package.json version

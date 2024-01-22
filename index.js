@@ -1,5 +1,6 @@
 const fs = require('node:fs'),
   path = require('node:path'),
+  cp = require('node:child_process'),
   prompts = require('prompts'),
   args = require('minimist')(process.argv.slice(2))
 
@@ -25,6 +26,15 @@ function copyRecursive(source, destination) {
   })
 }
 
+/**
+ * Copy source package to destination
+ * source : (PACKAGE PATH + PROJECT TYPE)
+ * destination : (CWD + NAME)
+ *
+ * @param {string | null} source
+ * @param {string | null} des
+ * @returns {boolean | void}
+ */
 function sourceDesPackage(source, des) {
   if (!(source ?? des)) {
     console.error('Package name is not defined !')
@@ -52,7 +62,8 @@ function sourceDesPackage(source, des) {
           { title: 'PERN STACK', value: 'PERN' },
           { title: 'ASTRO JS', value: 'ASTRO' },
           { title: 'BOOTSTRAP TEMPLATE 1', value: 'TEMPLATE/1' },
-          { title: 'BOOTSTRAP TEMPLATE 2', value: 'TEMPLATE/2' }
+          { title: 'BOOTSTRAP TEMPLATE 2', value: 'TEMPLATE/2' },
+          { title: 'LARAVEL PROJECT', value: 'PHP_LARAVEL' }
         ]
       }
     ],
@@ -87,6 +98,7 @@ function sourceDesPackage(source, des) {
     process.exit(1)
   }
 
+  const rootPath = __dirname
   const packagePath = path.join(__dirname, 'packages', projectType)
   const outputPath = path.join(process.cwd(), getName) // user current working directory
 
@@ -99,8 +111,27 @@ function sourceDesPackage(source, des) {
     process.exit(1)
   }
 
-  // *** copying to output PATH ...
-  sourceDesPackage(packagePath, outputPath)
+  if (projectType === 'PHP_LARAVEL') {
+    console.log('ABSTACK> Required composer, NODE, and NPM ...')
+    try {
+      const composerPHARScript = path.join(rootPath, 'composer.phar')
+      const composerProcess = cp.spawnSync(
+        `${composerPHARScript}`,
+        ['create-project', 'laravel/laravel', projectName],
+        { stdio: 'inherit' }
+      )
+      if (composerProcess.status !== 0) {
+        console.error('ABSTACK> Composer command failed!')
+      }
+    } catch (error) {
+      console.error(
+        'ABSTACK> Composer not installed or project creation failed!'
+      )
+    }
+  } else {
+    // *** copying to output PATH ...
+    sourceDesPackage(packagePath, outputPath)
+  }
 
   console.log(
     `ABSTACK> Project ${getName} created successfully at ${outputPath}`
