@@ -11,6 +11,7 @@ lerna-debug.log*
 packages/ci
 node_modules
 tests
+README_ORI.md
 dist
 dist-ssr
 *.local

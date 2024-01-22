@@ -62,7 +62,6 @@ function sourceDesPackage(source, des) {
           { title: 'PERN STACK', value: 'PERN' },
           { title: 'ASTRO JS', value: 'ASTRO' },
           { title: 'BOOTSTRAP TEMPLATE 1', value: 'TEMPLATE/1' },
-          { title: 'BOOTSTRAP TEMPLATE 2', value: 'TEMPLATE/2' },
           { title: 'LARAVEL PROJECT', value: 'PHP_LARAVEL' }
         ]
       }
