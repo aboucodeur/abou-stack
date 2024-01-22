@@ -26,7 +26,7 @@
         "composer.phar"
     ],
     "scripts": {
-        "postbuild": "VERSION=0.0.29 npx gulp && cd dist && npm publish",
+        "postbuild": "VERSION=0.0.30 npx gulp && cd dist && npm publish",
         "print:version" : "echo 'LATEST VERSION : ' $(cat package.json | grep 'VERSION=' | cut -d' ' -f10 | cut -d'=' -f2 | head -1)",
         "build": "rm -rf dist && pnpm print:version && rollup -c rollup.config.js && pnpm postbuild",
         "clean_test" : "clear; rm -rf tests/*; echo 'Clean as success !!!'",
