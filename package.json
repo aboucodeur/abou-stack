@@ -1,7 +1,7 @@
 {
     "name": "create-abou-stack",
     "version": "1.0.0",
-    "description": "Scafold new aboustack app based in pern stack",
+    "description": "Scafold new app based in your personnal tech stack",
     "main": "index.js",
     "publishConfig": {
         "access": "public"
@@ -26,10 +26,13 @@
     ],
     "scripts": {
         "postbuild": "VERSION=0.0.29 npx gulp && cd dist && npm publish",
-        "build": "rm -rf dist && rollup -c rollup.config.js && pnpm postbuild",
-        "client:start": "pnpm --filter frontend dev",
-        "server:start": "pnpm --filter backend dev",
-        "static:start": "pnpm --filter static dev"
+        "print:version" : "echo 'CURRENT VERSION : ' $(cat package.json | grep 'VERSION=' | cut -d' ' -f10 | cut -d'=' -f2 | head -1)",
+        "build": "rm -rf dist && pnpm print:version && rollup -c rollup.config.js && pnpm postbuild",
+        "clean_test" : "clear; rm -rf tests/*; echo 'Clean as success !!!'",
+        "e_test" : "pnpm clean_test && clear && cd tests && node ../index.js",
+        "pern:c:start" : "cd packages/PERN/frontend && pnpm run dev",
+        "pern:s:start" : "cd packages/PERN/frontend && pnpm run dev",
+        "astro:start": "pnpm --filter ASTRO dev"
     },
     "keywords": [
         "aboustack",
@@ -41,7 +44,10 @@
         "postgres",
         "vite",
         "astro",
-        "stack"
+        "stack",
+        "javascript",
+        "typescript",
+        ""
     ],
     "author": "aboucodeur",
     "license": "MIT",

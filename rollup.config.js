@@ -9,6 +9,7 @@ module.exports = rollup.defineConfig({
   output: {
     file: 'dist/index.js',
     format: 'cjs',
+    // rollup using "use strict"; at top level solve this 
     banner: '#!/usr/bin/env node'
   }
 })
