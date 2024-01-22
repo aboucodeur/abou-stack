@@ -10,6 +10,7 @@ lerna-debug.log*
 # bases
 packages/ci
 node_modules
+tests
 dist
 dist-ssr
 *.local
